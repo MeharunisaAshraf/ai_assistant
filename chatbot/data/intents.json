@@ -1,0 +1,134 @@
+[
+  {
+    "page_id": "add_property",
+    "intent_type": "navigation",
+    "url": "",
+    "examples": [
+      {
+        "query": "How to add property",
+        "answer": "From the dashboard, click 'Add New Property' to open the Add Property flow."
+      }
+    ]
+  },
+  {
+    "page_id": "choose_property_type",
+    "intent_type": "navigation",
+    "url": "",
+    "examples": [
+      {
+        "query": "How do I select single-family home?",
+        "answer": "In the Add Property flow, on the Property Type step, choose 'Single-Family Home' and click Next."
+      }
+    ]
+  },
+  {
+    "page_id": "enter_property_address",
+    "intent_type": "navigation",
+    "url": "",
+    "examples": [
+      {
+        "query": "Where do I enter my property’s address?",
+        "answer": "On the Address Info page, fill in the name, street address, city, state, and zip code, then click Next."
+      }
+    ]
+  },
+  {
+    "page_id": "confirm_property_address",
+    "intent_type": "navigation",
+    "url": "",
+    "examples": [
+      {
+        "query": "How do I confirm the address I entered?",
+        "answer": "Review the address on the Confirm Address page and click 'Confirm' to proceed."
+      }
+    ]
+  },
+  {
+    "page_id": "enter_listing_info",
+    "intent_type": "navigation",
+    "url": "",
+    "examples": [
+      {
+        "query": "How do I add bedrooms and bathrooms?",
+        "answer": "On the Listing Info page, enter the number of bedrooms, bathrooms, square footage, etc., then click Next."
+      }
+    ]
+  },
+  {
+    "page_id": "enter_rental_details",
+    "intent_type": "navigation",
+    "url": "",
+    "examples": [
+      {
+        "query": "How can I set rent amount and deposit?",
+        "answer": "On the Rental Details page, choose rental type, enter rent and deposit amounts, set availability dates, then click Next."
+      }
+    ]
+  },
+  {
+    "page_id": "select_amenities",
+    "intent_type": "navigation",
+    "url": "",
+    "examples": [
+      {
+        "query": "How do I add amenities to my listing?",
+        "answer": "On the Amenities page, toggle on each feature you want (e.g. Garage, Pool), then click Next."
+      }
+    ]
+  },
+  {
+    "page_id": "enter_cost_and_fee",
+    "intent_type": "navigation",
+    "url": "",
+    "examples": [
+      {
+        "query": "How do I add fees like parking or utilities?",
+        "answer": "On the Cost & Fees page, click 'Add Fee', select category, enter amount and frequency, then save."
+      }
+    ]
+  },
+  {
+    "page_id": "enter_investor_info",
+    "intent_type": "navigation",
+    "url": "",
+    "examples": [
+      {
+        "query": "How do I specify owner or investor details?",
+        "answer": "On the Investors page, click 'Add Investor', fill in name, email, share %, emergency contact, then click Next."
+      }
+    ]
+  },
+  {
+    "page_id": "upload_documents",
+    "intent_type": "navigation",
+    "url": "",
+    "examples": [
+      {
+        "query": "Can you guide me where to upload documents for my property?",
+        "answer": "In the Documents step, click 'Upload Document', choose your file, select its type, and click Upload."
+      }
+    ]
+  },
+  {
+    "page_id": "select_document_type",
+    "intent_type": "navigation",
+    "url": "",
+    "examples": [
+      {
+        "query": "How do I choose the document type?",
+        "answer": "On the Documents page, open the 'Document Type' dropdown, pick the right type (e.g. Lease Agreement), then upload."
+      }
+    ]
+  },
+  {
+    "page_id": "set_unavailability",
+    "intent_type": "navigation",
+    "url": "",
+    "examples": [
+      {
+        "query": "How can I add unavailability day of my property?",
+        "answer": "On the Unavailability page, click the date you want to block, enter a reason, then save."
+      }
+    ]
+  }
+]

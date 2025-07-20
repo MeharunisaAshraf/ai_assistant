@@ -1,0 +1,17 @@
+[project]
+name = "ai-project"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "django>=5.2.4",
+    "langchain-community>=0.3.27",
+    "langchain-ollama>=0.3.5",
+    "ollama>=0.5.1",
+    "pdfminer>=20191125",
+    "pdfminer-six==20201018",
+    "pi-heif>=1.0.0",
+    "unstructured>=0.18.9",
+    "unstructured-inference>=1.0.5",
+]
