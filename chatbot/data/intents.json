@@ -1,134 +1,238 @@
-[
-  {
-    "page_id": "add_property",
-    "intent_type": "navigation",
-    "url": "",
-    "examples": [
-      {
-        "query": "How to add property",
-        "answer": "From the dashboard, click 'Add New Property' to open the Add Property flow."
-      }
-    ]
+{
+  "intents": [
+    {
+      "page_id": "add_property",
+      "intent_type": "navigation",
+      "category": "property_management",
+      "description": "Start the process of adding a new property to your portfolio",
+      "keywords": ["add", "create", "new", "property", "listing", "start"],
+      "patterns": [
+        "how to add property",
+        "add new property",
+        "create property listing",
+        "start adding property"
+      ],
+      "response": "To add a new property, go to your dashboard and click the 'Add New Property' button to start the setup process.",
+      "next_steps": ["choose_property_type", "enter_property_address"],
+      "quick_actions": [
+        {"text": "Choose property type", "action": "navigate", "target": "choose_property_type"},
+        {"text": "Skip to address entry", "action": "navigate", "target": "enter_property_address"}
+      ]
+    },
+    {
+      "page_id": "choose_property_type",
+      "intent_type": "navigation",
+      "category": "property_setup",
+      "description": "Select the type of property you want to add (single family, apartment, condo, etc.)",
+      "keywords": ["property type", "single family", "apartment", "condo", "select", "choose"],
+      "patterns": [
+        "how to select property type",
+        "choose single family home",
+        "what property types available",
+        "select apartment type"
+      ],
+      "response": "In the Add Property flow, choose your property type (Single-Family Home, Apartment, Condo, etc.) and click Next.",
+      "next_steps": ["enter_property_address"],
+      "quick_actions": [
+        {"text": "Enter address", "action": "navigate", "target": "enter_property_address"}
+      ]
+    },
+    {
+      "page_id": "enter_property_address",
+      "intent_type": "navigation",
+      "category": "property_setup",
+      "description": "Enter the physical address and location details of your property",
+      "keywords": ["address", "location", "street", "city", "state", "zip"],
+      "patterns": [
+        "where to enter address",
+        "add property address",
+        "enter location details",
+        "how to add address"
+      ],
+      "response": "On the Address Info page, fill in the property name, street address, city, state, and ZIP code, then click Next.",
+      "next_steps": ["confirm_property_address"],
+      "quick_actions": [
+        {"text": "Confirm address", "action": "navigate", "target": "confirm_property_address"}
+      ]
+    },
+    {
+      "page_id": "confirm_property_address",
+      "intent_type": "navigation",
+      "category": "property_setup",
+      "description": "Review and confirm the property address details before proceeding",
+      "keywords": ["confirm", "verify", "check", "address", "review"],
+      "patterns": [
+        "how to confirm address",
+        "verify property address",
+        "check address details"
+      ],
+      "response": "Review the address details on the Confirm Address page and click 'Confirm' to proceed.",
+      "next_steps": ["enter_listing_info"],
+      "quick_actions": [
+        {"text": "Add listing details", "action": "navigate", "target": "enter_listing_info"}
+      ]
+    },
+    {
+      "page_id": "enter_listing_info",
+      "intent_type": "navigation",
+      "category": "property_details",
+      "description": "Add basic property details like bedrooms, bathrooms, and square footage",
+      "keywords": ["bedrooms", "bathrooms", "square feet", "listing", "details", "rooms"],
+      "patterns": [
+        "how to add bedrooms",
+        "enter bathroom count",
+        "add square footage",
+        "property details"
+      ],
+      "response": "On the Listing Info page, enter the number of bedrooms, bathrooms, square footage, and other property details, then click Next.",
+      "next_steps": ["enter_rental_details", "select_amenities"],
+      "quick_actions": [
+        {"text": "Set rental details", "action": "navigate", "target": "enter_rental_details"},
+        {"text": "Add amenities", "action": "navigate", "target": "select_amenities"}
+      ]
+    },
+    {
+      "page_id": "enter_rental_details",
+      "intent_type": "navigation",
+      "category": "rental_management",
+      "description": "Set rental pricing, deposits, lease terms, and availability dates",
+      "keywords": ["rent", "deposit", "rental", "price", "lease", "availability"],
+      "patterns": [
+        "set rent amount",
+        "add security deposit",
+        "rental details",
+        "lease information"
+      ],
+      "response": "On the Rental Details page, choose rental type, enter rent and deposit amounts, set availability dates, then click Next.",
+      "next_steps": ["select_amenities", "enter_cost_and_fee"],
+      "quick_actions": [
+        {"text": "Add amenities", "action": "navigate", "target": "select_amenities"},
+        {"text": "Add fees", "action": "navigate", "target": "enter_cost_and_fee"}
+      ]
+    },
+    {
+      "page_id": "select_amenities",
+      "intent_type": "navigation",
+      "category": "property_features",
+      "description": "Choose property amenities and features like garage, pool, gym, parking",
+      "keywords": ["amenities", "features", "garage", "pool", "gym", "parking"],
+      "patterns": [
+        "add amenities",
+        "select features",
+        "choose amenities",
+        "property features"
+      ],
+      "response": "On the Amenities page, toggle on each feature you want (Garage, Pool, Gym, etc.), then click Next.",
+      "next_steps": ["enter_cost_and_fee"],
+      "quick_actions": [
+        {"text": "Add fees", "action": "navigate", "target": "enter_cost_and_fee"}
+      ]
+    },
+    {
+      "page_id": "enter_cost_and_fee",
+      "intent_type": "navigation",
+      "category": "financial_details",
+      "description": "Add additional costs and fees like parking fees, utility charges, or other charges",
+      "keywords": ["fees", "cost", "parking", "utilities", "charges", "additional"],
+      "patterns": [
+        "add fees",
+        "set parking fees",
+        "utility charges",
+        "additional costs"
+      ],
+      "response": "On the Cost & Fees page, click 'Add Fee', select the category, enter amount and frequency, then save.",
+      "next_steps": ["enter_investor_info", "upload_documents"],
+      "quick_actions": [
+        {"text": "Add investors", "action": "navigate", "target": "enter_investor_info"},
+        {"text": "Upload documents", "action": "navigate", "target": "upload_documents"}
+      ]
+    },
+    {
+      "page_id": "enter_investor_info",
+      "intent_type": "navigation",
+      "category": "ownership_management",
+      "description": "Add investor or owner information including contact details and ownership shares",
+      "keywords": ["investor", "owner", "partnership", "share", "contact"],
+      "patterns": [
+        "add investor details",
+        "owner information",
+        "investor info",
+        "partnership setup"
+      ],
+      "response": "On the Investors page, click 'Add Investor', fill in name, email, ownership share %, emergency contact, then click Next.",
+      "next_steps": ["upload_documents"],
+      "quick_actions": [
+        {"text": "Upload documents", "action": "navigate", "target": "upload_documents"}
+      ]
+    },
+    {
+      "page_id": "upload_documents",
+      "intent_type": "navigation",
+      "category": "document_management",
+      "description": "Upload property documents like lease agreements, contracts, or other files",
+      "keywords": ["documents", "upload", "files", "lease", "contract"],
+      "patterns": [
+        "upload documents",
+        "add lease agreement",
+        "attach files",
+        "document upload"
+      ],
+      "response": "In the Documents step, click 'Upload Document', choose your file, select document type, and click Upload.",
+      "next_steps": ["select_document_type", "set_unavailability"],
+      "quick_actions": [
+        {"text": "Select document type", "action": "navigate", "target": "select_document_type"},
+        {"text": "Set unavailability", "action": "navigate", "target": "set_unavailability"}
+      ]
+    },
+    {
+      "page_id": "select_document_type",
+      "intent_type": "navigation",
+      "category": "document_management",
+      "description": "Choose the appropriate document type category when uploading files",
+      "keywords": ["document type", "lease agreement", "insurance", "inspection"],
+      "patterns": [
+        "choose document type",
+        "document categories",
+        "lease agreement type"
+      ],
+      "response": "Open the 'Document Type' dropdown and select the appropriate type (Lease Agreement, Insurance Policy, etc.) before uploading.",
+      "next_steps": ["set_unavailability"],
+      "quick_actions": [
+        {"text": "Set unavailability", "action": "navigate", "target": "set_unavailability"}
+      ]
+    },
+    {
+      "page_id": "set_unavailability",
+      "intent_type": "navigation",
+      "category": "calendar_management",
+      "description": "Block specific dates when the property is unavailable for maintenance or other reasons",
+      "keywords": ["unavailable", "blocked", "calendar", "maintenance", "dates"],
+      "patterns": [
+        "block dates",
+        "set unavailable days",
+        "add unavailability",
+        "calendar blocking"
+      ],
+      "response": "On the Unavailability page, click the date you want to block, enter a reason, and save to mark it unavailable.",
+      "next_steps": [],
+      "quick_actions": []
+    }
+  ],
+  "settings": {
+    "default_fallback": "I can help you navigate through the property setup process. What specific step do you need assistance with?",
+    "context_aware": true,
+    "enable_quick_actions": true,
+    "max_suggestions": 2
   },
-  {
-    "page_id": "choose_property_type",
-    "intent_type": "navigation",
-    "url": "",
-    "examples": [
-      {
-        "query": "How do I select single-family home?",
-        "answer": "In the Add Property flow, on the Property Type step, choose 'Single-Family Home' and click Next."
-      }
-    ]
-  },
-  {
-    "page_id": "enter_property_address",
-    "intent_type": "navigation",
-    "url": "",
-    "examples": [
-      {
-        "query": "Where do I enter my property’s address?",
-        "answer": "On the Address Info page, fill in the name, street address, city, state, and zip code, then click Next."
-      }
-    ]
-  },
-  {
-    "page_id": "confirm_property_address",
-    "intent_type": "navigation",
-    "url": "",
-    "examples": [
-      {
-        "query": "How do I confirm the address I entered?",
-        "answer": "Review the address on the Confirm Address page and click 'Confirm' to proceed."
-      }
-    ]
-  },
-  {
-    "page_id": "enter_listing_info",
-    "intent_type": "navigation",
-    "url": "",
-    "examples": [
-      {
-        "query": "How do I add bedrooms and bathrooms?",
-        "answer": "On the Listing Info page, enter the number of bedrooms, bathrooms, square footage, etc., then click Next."
-      }
-    ]
-  },
-  {
-    "page_id": "enter_rental_details",
-    "intent_type": "navigation",
-    "url": "",
-    "examples": [
-      {
-        "query": "How can I set rent amount and deposit?",
-        "answer": "On the Rental Details page, choose rental type, enter rent and deposit amounts, set availability dates, then click Next."
-      }
-    ]
-  },
-  {
-    "page_id": "select_amenities",
-    "intent_type": "navigation",
-    "url": "",
-    "examples": [
-      {
-        "query": "How do I add amenities to my listing?",
-        "answer": "On the Amenities page, toggle on each feature you want (e.g. Garage, Pool), then click Next."
-      }
-    ]
-  },
-  {
-    "page_id": "enter_cost_and_fee",
-    "intent_type": "navigation",
-    "url": "",
-    "examples": [
-      {
-        "query": "How do I add fees like parking or utilities?",
-        "answer": "On the Cost & Fees page, click 'Add Fee', select category, enter amount and frequency, then save."
-      }
-    ]
-  },
-  {
-    "page_id": "enter_investor_info",
-    "intent_type": "navigation",
-    "url": "",
-    "examples": [
-      {
-        "query": "How do I specify owner or investor details?",
-        "answer": "On the Investors page, click 'Add Investor', fill in name, email, share %, emergency contact, then click Next."
-      }
-    ]
-  },
-  {
-    "page_id": "upload_documents",
-    "intent_type": "navigation",
-    "url": "",
-    "examples": [
-      {
-        "query": "Can you guide me where to upload documents for my property?",
-        "answer": "In the Documents step, click 'Upload Document', choose your file, select its type, and click Upload."
-      }
-    ]
-  },
-  {
-    "page_id": "select_document_type",
-    "intent_type": "navigation",
-    "url": "",
-    "examples": [
-      {
-        "query": "How do I choose the document type?",
-        "answer": "On the Documents page, open the 'Document Type' dropdown, pick the right type (e.g. Lease Agreement), then upload."
-      }
-    ]
-  },
-  {
-    "page_id": "set_unavailability",
-    "intent_type": "navigation",
-    "url": "",
-    "examples": [
-      {
-        "query": "How can I add unavailability day of my property?",
-        "answer": "On the Unavailability page, click the date you want to block, enter a reason, then save."
-      }
-    ]
+  "categories": {
+    "property_management": "General property management tasks",
+    "property_setup": "Initial property setup steps",
+    "property_details": "Property specifications",
+    "rental_management": "Rental and lease settings",
+    "property_features": "Amenities and features",
+    "financial_details": "Fees and costs",
+    "ownership_management": "Owner and investor info",
+    "document_management": "Document handling",
+    "calendar_management": "Availability management"
   }
-]
+}
