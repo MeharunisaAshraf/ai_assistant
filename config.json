@@ -1,0 +1,14 @@
+{
+    "host": "localhost",
+    "port": 5432,
+    "database": "rental-guru",
+    "user": "postgres",
+    "password": "postgres",
+    "GEMINI_API_KEY": "AIzaSyBADdNI4eZopFMWgiboXcYdnpvJaXBpg0Q",
+    "INTENTS_FILE_PATH": "chatbot/data/intents.json",
+    "MODEL_NAME": "gemini-2.5-flash-lite",
+    "TEMPERATURE": 0.1,
+    "TOP_P": 0.8,
+    "TOP_K": 40,
+    "MAX_OUTPUT_TOKENS": 1024
+}
