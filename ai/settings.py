@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 """
 
 from pathlib import Path
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -98,6 +99,17 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+# REST Framework Configuration
+REST_FRAMEWORK = {
+    'DEFAULT_RENDERER_CLASSES': [
+        'rest_framework.renderers.JSONRenderer',
+    ],
+    'DEFAULT_PARSER_CLASSES': [
+        'rest_framework.parsers.JSONParser',
+    ],
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+    'PAGE_SIZE': 20
+}
 
 # Internationalization
 # https://docs.djangoproject.com/en/5.2/topics/i18n/
@@ -120,3 +132,33 @@ STATIC_URL = "static/"
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+CHATBOT_TABLES = [
+    'properties_amenities',
+     'properties_calendarslot',
+     'properties_costfee',
+     'properties_costfeescategory',
+     'properties_invitation',
+     'properties_listinginfo',
+     'properties_ownerinfo',
+     'properties_property',
+     'properties_propertyassignedamenities',
+     'properties_propertydocument',
+     'properties_propertyphoto',
+     'properties_propertytypeandamenity',
+     'properties_rentdetails',
+     'properties_unit'
+   ]
+
+# Intent Classification Settings
+INTENT_SIMILARITY_THRESHOLD = 0.85
+
+# Gemini API Configuration
+GEMINI_API_KEY = os.getenv('GEMINI_API_KEY')
+
+# Database Configuration
+DATABASE_URL = os.getenv('DB_URI')
+
+# Ollama Configuration (for intent classification)
+OLLAMA_URL = os.getenv('OLLAMA_URL', 'http://localhost:11434')
+OLLAMA_MODEL = os.getenv('OLLAMA_MODEL', 'llama3.2:3b')
