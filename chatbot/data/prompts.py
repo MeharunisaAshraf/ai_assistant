@@ -26,6 +26,7 @@ initial_prompt = """
                     - Use "sql_query" if the query asks for specific data, reports, statistics, or information that would require database queries
                     - Examples of SQL queries: "show me all properties", "how many tenants do I have", "what's the total rent collected"
                     - Examples of FAQ queries: "how to add property", "where to enter address", "how to upload documents"
+                    - Dont use functions like STRFTIME in sql_query
                     - If its sql_query then include the query as "SELECT ... FROM ... WHERE ..." in response using given tables.
                     - Be precise with confidence scores (0.8+ for clear matches, 0.5-0.7 for uncertain)
                     - Only return valid JSON
@@ -43,28 +44,33 @@ prompt_with_sql_data = """
                         5. Uses friendly, professional tone
                     """
 prompt_with_sql_error = """
-                    You are an intelligent assistant for a property management system. Analyze the user query and determine:
-        
+                    You are an intelligent assistant for a property management system. The previous SQL query failed with an error.
+                    Please analyze the error and generate a corrected SQL query.
+
                     AVAILABLE DATABASE TABLES:
                     {DATABASE_SCHEMA}
-        
+
                     USER QUERY: "{USER_QUERY}"
-                    
-                    QUERY WHICH YOU GENERATED EARLIER:
+
+                    PREVIOUS SQL QUERY THAT FAILED:
                     {SQL_QUERY}
-                    
-                    ERROR IN GENERATED QUERY: 
+
+                    ERROR MESSAGE:
                     {ERROR}
-        
+
                     Respond with ONLY a JSON object in this exact format:
                     {{
                         "classification": "sql_query",
                         "confidence": 0.0-1.0,
                         "matched_intent_id": null,
-                        "reasoning": "brief explanation of why this classification was chosen"
+                        "reasoning": "brief explanation of the error and how it was fixed",
                         "sql_query": "SELECT ... FROM ... WHERE ..."
                     }}
-        
-                    CLASSIFICATION RULES:
-                    - Generate a new query that fixes the error in the previous query.
+
+                    CORRECTION RULES:
+                    - Analyze the error message carefully to understand what went wrong
+                    - Check table names, column names, and SQL syntax against the database schema
+                    - Generate a corrected query that addresses the specific error
+                    - Ensure the corrected query still answers the original user question
+                    - Use proper SQL syntax and valid table/column names from the schema
                 """

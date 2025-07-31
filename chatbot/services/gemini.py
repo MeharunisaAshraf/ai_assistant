@@ -6,6 +6,7 @@ Determines if query is FAQ-based or SQL-related
 """
 
 import logging
+from chatbot.data.constants import Message, Error, Success
 from chatbot.helpers.gemini_model import GeminiBot
 from chatbot.helpers.config_connector import get_db_connection
 logger = logging.getLogger(__name__)
@@ -20,21 +21,21 @@ class AIAssistant(GeminiBot):
 
     def run(self):
         """Function to run the chatbot interactively"""
-        print("=== AI Chatbot ===")
-        print("Type 'quit' to exit.\n")
+        print(Message.AI_BOT)
+        print(Message.QUIT_INSTRUCTION)
         try:
             if not self.chatbot.test_connection():
-                print("Failed to connect to Gemini API. Please check your API key.")
+                print(Error.GEMINI_CONNECTION)
                 return
 
-            print("Chatbot initialized successfully!")
+            print(Success.GEMINI_CONNECTED)
             intents_text = self.chatbot.get_intent_descriptions()
 
             while True:
-                user_input = input("You: ").strip()
+                user_input = input(Message.USER_INPUT).strip()
 
                 if user_input.lower() in ['quit', 'exit', 'bye']:
-                    print("Goodbye!")
+                    print(Message.EXIT_MESSAGE)
                     break
 
                 if not user_input:

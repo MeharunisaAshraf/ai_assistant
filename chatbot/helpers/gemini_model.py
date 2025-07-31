@@ -3,6 +3,7 @@ import logging
 from typing import Dict, Optional
 import google.generativeai as genai
 from chatbot.data.prompts import initial_prompt, prompt_with_sql_data, prompt_with_sql_error
+from chatbot.data.constants import Message
 from chatbot.helpers.config_connector import load_config, load_intents
 logger = logging.getLogger(__name__)
 
@@ -112,7 +113,7 @@ class GeminiBot:
         elif classification_result.get('classification') == 'sql_query':
             response_data['response'] = self._handle_sql_query(chatbot, user_query, database_schema, db_connector, variables, classification_result)
         else:
-            response_data['response'] = "I'm not sure how to categorize your question. Could you please rephrase it?"
+            response_data['response'] = Message.REPHRASE_MESSAGE
 
         logger.info(f"Query processed: {classification_result.get('classification')}")
         return response_data
@@ -135,20 +136,131 @@ class GeminiBot:
             return "I found a matching FAQ topic, but I don't have the detailed response available."
 
     def _handle_sql_query(self, chatbot, user_query, database_schema, db_connector, variables, result) -> str:
-        """Handle SQL-related queries"""
-        print("Executing query inside _handle_sql_query: ", result['sql_query'])
-        if result:
-            if result.get('error'):
-                variables['ERROR'] = result['error']
-                prompt_with_sql_error_ = self.prompt_with_sql_error.format(**variables)
-                result = chatbot.process_query(chatbot, user_query, prompt_with_sql_error_, database_schema, db_connector)
-                self._handle_sql_query(chatbot, user_query, database_schema, db_connector, variables, result)
+        """Handle SQL-related queries with error correction and retry logic"""
+        return self._execute_sql_with_retry(
+            chatbot=chatbot,
+            user_query=user_query,
+            database_schema=database_schema,
+            db_connector=db_connector,
+            variables=variables,
+            classification_result=result,
+            max_retries=3
+        )
 
-        data_ = db_connector.execute_query(query=str(result['sql_query']))
-        variables['DATA_'] = data_
-        new_prompt = self.prompt_with_sql_data.format(**variables)
-        response = chatbot.final_response(new_prompt)
-        return response
+    def _execute_sql_with_retry(self, chatbot, user_query, database_schema, db_connector, variables, classification_result, max_retries=3) -> str:
+        """
+        Generic method to execute SQL queries with error correction and retry logic.
+        Handles both original queries and error correction scenarios.
+        """
+        current_result = classification_result
+        retry_count = 0
+
+        while retry_count <= max_retries:
+            try:
+                sql_query = current_result.get('sql_query')
+                if not sql_query:
+                    return "I couldn't generate a valid SQL query for your request. Please try rephrasing your question."
+
+                logger.info(f"Executing SQL query (attempt {retry_count + 1}): {sql_query}")
+                print(f"Executing query (attempt {retry_count + 1}): {sql_query}")
+
+                # Execute the query
+                query_result = db_connector.execute_query(query=str(sql_query))
+
+                # Check if query execution was successful
+                if query_result.get('error'):
+                    error_message = query_result['error']
+                    logger.warning(f"SQL query failed (attempt {retry_count + 1}): {error_message}")
+
+                    if retry_count >= max_retries:
+                        return f"I encountered an error while processing your request: {error_message}. Please try rephrasing your question or contact support."
+
+                    # Prepare error correction
+                    retry_count += 1
+                    current_result = self._correct_sql_error(
+                        user_query=user_query,
+                        database_schema=database_schema,
+                        failed_sql_query=sql_query,
+                        error_message=error_message,
+                        variables=variables
+                    )
+
+                    if not current_result:
+                        return "I couldn't correct the SQL query error. Please try rephrasing your question."
+
+                    continue  # Retry with corrected query
+
+                # Query executed successfully, generate response
+                logger.info(f"SQL query executed successfully, {query_result.get('row_count', 0)} rows returned")
+
+                # Prepare variables for response generation
+                response_variables = variables.copy()
+                response_variables['DATA_'] = query_result
+                response_variables['SQL_QUERY'] = sql_query
+
+                # Generate final response
+                response_prompt = self.prompt_with_sql_data.format(**response_variables)
+                final_response = self.final_response(response_prompt)
+
+                return final_response
+
+            except Exception as e:
+                logger.error(f"Unexpected error in SQL execution (attempt {retry_count + 1}): {str(e)}")
+
+                if retry_count >= max_retries:
+                    return f"I encountered an unexpected error while processing your request: {str(e)}. Please try again later."
+
+                retry_count += 1
+                # For unexpected errors, we'll try to regenerate the query
+                current_result = self._correct_sql_error(
+                    user_query=user_query,
+                    database_schema=database_schema,
+                    failed_sql_query=current_result.get('sql_query', ''),
+                    error_message=str(e),
+                    variables=variables
+                )
+
+                if not current_result:
+                    return "I encountered an error and couldn't recover. Please try rephrasing your question."
+
+        return "I couldn't process your request after multiple attempts. Please try rephrasing your question."
+
+    def _correct_sql_error(self, user_query, database_schema, failed_sql_query, error_message, variables) -> Optional[Dict]:
+        """
+        Generate a corrected SQL query based on the error message.
+        Returns the corrected classification result or None if correction fails.
+        """
+        try:
+            # Prepare variables for error correction prompt
+            error_variables = variables.copy()
+            error_variables.update({
+                'USER_QUERY': user_query,
+                'DATABASE_SCHEMA': database_schema,
+                'SQL_QUERY': failed_sql_query,
+                'ERROR': error_message
+            })
+
+            # Generate error correction prompt
+            error_correction_prompt = self.prompt_with_sql_error.format(**error_variables)
+
+            logger.info(f"Attempting to correct SQL error: {error_message}")
+
+            # Get corrected query from Gemini
+            response = self.model.generate_content(
+                error_correction_prompt,
+                generation_config=self.generation_config
+            )
+
+            # Parse the corrected result
+            corrected_result = json.loads(response.text.strip().replace('```json', '').replace('```', ''))
+
+            logger.info(f"Generated corrected SQL query: {corrected_result.get('sql_query')}")
+
+            return corrected_result
+
+        except Exception as e:
+            logger.error(f"Error in SQL correction: {str(e)}")
+            return None
 
     def test_connection(self) -> bool:
         """Test Gemini API connection"""
