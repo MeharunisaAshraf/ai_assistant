@@ -2,9 +2,9 @@ import json
 import logging
 from typing import Dict, Optional
 import google.generativeai as genai
-from chatbot.data.prompts import initial_prompt, prompt_with_sql_data, prompt_with_sql_error
 from chatbot.data.constants import Message
-from chatbot.helpers.config_connector import load_config, load_intents
+from chatbot.data.prompts import initial_prompt, prompt_with_sql_data, prompt_with_sql_error
+from chatbot.helpers.config_connector import load_config, load_intents, get_db_connection
 logger = logging.getLogger(__name__)
 
 class GeminiBot:
@@ -16,6 +16,8 @@ class GeminiBot:
         self.prompt_with_sql_error = prompt_with_sql_error
         self.config = load_config()
         self.intents_data = load_intents()
+        self.intents_text = self.get_intent_descriptions()
+        self.db_connector, self.database_schema = get_db_connection()
 
         genai.configure(api_key=self.config.get('GEMINI_API_KEY', ''))
         self.model = genai.GenerativeModel(self.config.get('MODEL_NAME', 'gemini-2.5-flash-lite'))
@@ -42,12 +44,11 @@ class GeminiBot:
         intents_text = '\n'.join(intent_descriptions)
         return intents_text
 
-    def classify_query(self, user_query: str, database_schema: Dict) -> Dict:
+    def classify_query(self, user_query) -> Dict:
         try:
-            intents_text = self.get_intent_descriptions()
             variables = {
-                "INTENTS_TEXT": intents_text,
-                "DATABASE_SCHEMA": database_schema,
+                "INTENTS_TEXT": self.intents_text,
+                "DATABASE_SCHEMA": self.database_schema,
                 "USER_QUERY": user_query
             }
             prompt = initial_prompt.format(**variables)
@@ -96,29 +97,30 @@ class GeminiBot:
                 return intent
         return None
 
-    def process_query(self, chatbot, user_query, database_schema, db_connector, result, intents_text, variables) -> Dict:
+    def process_query(self, user_query) -> Dict:
         logger.info(f"Processing query: {user_query}")
 
-        classification_result = self.classify_query(user_query, database_schema)
+        classification_result = self.classify_query(user_query)
+        classified_as = classification_result.get('classification', 'unknown')
 
         response_data = {
             'user_query': user_query,
             'classification': classification_result,
             'response': '',
-            'response_type': classification_result.get('classification', 'unknown')
+            'response_type': classified_as
         }
 
-        if classification_result.get('classification') == 'faq':
+        if classified_as == 'faq':
             response_data['response'] = self._handle_faq_query(classification_result)
-        elif classification_result.get('classification') == 'sql_query':
-            response_data['response'] = self._handle_sql_query(chatbot, user_query, database_schema, db_connector, variables, classification_result)
+        elif classified_as == 'sql_query':
+            response_data['response'] = self._handle_sql_query(user_query, classification_result)
         else:
-            response_data['response'] = Message.REPHRASE_MESSAGE
+            response_data['response'] = Message.REPHRASE_MESSAGE.value
 
-        logger.info(f"Query processed: {classification_result.get('classification')}")
+        logger.info(f"Query processed: {classified_as}")
         return response_data
 
-    def _handle_faq_query(self, classification_result: Dict) -> str:
+    def _handle_faq_query(self, classification_result):
         """Handle FAQ-type queries"""
         intent_data = classification_result.get('intent_data')
         if intent_data:
@@ -135,19 +137,21 @@ class GeminiBot:
         else:
             return "I found a matching FAQ topic, but I don't have the detailed response available."
 
-    def _handle_sql_query(self, chatbot, user_query, database_schema, db_connector, variables, result) -> str:
+    def _handle_sql_query(self, user_query, result) -> str:
         """Handle SQL-related queries with error correction and retry logic"""
+        variables = {
+            "INTENTS_TEXT": self.intents_text,
+            "DATABASE_SCHEMA": self.database_schema,
+            "USER_QUERY": user_query
+        }
         return self._execute_sql_with_retry(
-            chatbot=chatbot,
             user_query=user_query,
-            database_schema=database_schema,
-            db_connector=db_connector,
             variables=variables,
             classification_result=result,
             max_retries=3
         )
 
-    def _execute_sql_with_retry(self, chatbot, user_query, database_schema, db_connector, variables, classification_result, max_retries=3) -> str:
+    def _execute_sql_with_retry(self, user_query, variables, classification_result, max_retries=3) -> str:
         """
         Generic method to execute SQL queries with error correction and retry logic.
         Handles both original queries and error correction scenarios.
@@ -165,7 +169,7 @@ class GeminiBot:
                 print(f"Executing query (attempt {retry_count + 1}): {sql_query}")
 
                 # Execute the query
-                query_result = db_connector.execute_query(query=str(sql_query))
+                query_result = self.db_connector.execute_query(query=str(sql_query))
 
                 # Check if query execution was successful
                 if query_result.get('error'):
@@ -179,7 +183,6 @@ class GeminiBot:
                     retry_count += 1
                     current_result = self._correct_sql_error(
                         user_query=user_query,
-                        database_schema=database_schema,
                         failed_sql_query=sql_query,
                         error_message=error_message,
                         variables=variables
@@ -214,7 +217,6 @@ class GeminiBot:
                 # For unexpected errors, we'll try to regenerate the query
                 current_result = self._correct_sql_error(
                     user_query=user_query,
-                    database_schema=database_schema,
                     failed_sql_query=current_result.get('sql_query', ''),
                     error_message=str(e),
                     variables=variables
@@ -225,7 +227,7 @@ class GeminiBot:
 
         return "I couldn't process your request after multiple attempts. Please try rephrasing your question."
 
-    def _correct_sql_error(self, user_query, database_schema, failed_sql_query, error_message, variables) -> Optional[Dict]:
+    def _correct_sql_error(self, user_query, failed_sql_query, error_message, variables) -> Optional[Dict]:
         """
         Generate a corrected SQL query based on the error message.
         Returns the corrected classification result or None if correction fails.
@@ -235,7 +237,7 @@ class GeminiBot:
             error_variables = variables.copy()
             error_variables.update({
                 'USER_QUERY': user_query,
-                'DATABASE_SCHEMA': database_schema,
+                'DATABASE_SCHEMA': self.database_schema,
                 'SQL_QUERY': failed_sql_query,
                 'ERROR': error_message
             })
