@@ -36,12 +36,28 @@ prompt_with_sql_data = """
                         The user asked: "{USER_QUERY}"
                         Database query results:
                         {DATA_}
+                        Format the result in HTML with proper tags:
+                        - Use <p> for paragraphs.
+                        - Use <ul> and <li> for bullet points.
                         Generate a natural, conversational response that:
-                        1. Directly answers the user's question
-                        2. Presents the data in an easy-to-understand format
-                        3. Includes relevant insights if applicable
-                        4. Is concise but informative
-                        5. Uses friendly, professional tone
+                        1. Presents the data in an easy-to-understand format
+                        2. Includes relevant insights if applicable
+                        3. Is informative and Users friendly, professional tone
+                        4. Avoid escaping inner quotes manually
+                    """
+prompt_for_navigation = """
+                        You are a helpful assistant for a property management system. 
+                        The user asked: "{USER_QUERY}"
+                        The classification result: "{CLASSIFICATION_RESULT}"
+                        Format the result in HTML with proper tags:
+                        - Use <p> for paragraphs.
+                        - Use <ul> and <li> for bullet points.
+                        Generate a natural, conversational response that:
+                        1. Presents the data in an easy-to-understand format
+                        2. Includes relevant insights if applicable
+                        3. Is concise but informative and Users friendly, professional tone
+                        4. Avoid escaping inner quotes manually
+                        5. Don't add line breaks in result
                     """
 prompt_with_sql_error = """
                     You are an intelligent assistant for a property management system. The previous SQL query failed with an error.

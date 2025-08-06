@@ -3,7 +3,7 @@ import logging
 from typing import Dict, Optional
 import google.generativeai as genai
 from chatbot.data.constants import Message
-from chatbot.data.prompts import initial_prompt, prompt_with_sql_data, prompt_with_sql_error
+from chatbot.data.prompts import initial_prompt, prompt_with_sql_data, prompt_with_sql_error, prompt_for_navigation
 from chatbot.helpers.config_connector import load_config, load_intents, get_db_connection
 logger = logging.getLogger(__name__)
 
@@ -111,7 +111,7 @@ class GeminiBot:
         }
 
         if classified_as == 'faq':
-            response_data['response'] = self._handle_faq_query(classification_result)
+            response_data['response'] = self._handle_faq_query(user_query, classification_result)
         elif classified_as == 'sql_query':
             response_data['response'] = self._handle_sql_query(user_query, classification_result)
         else:
@@ -120,18 +120,25 @@ class GeminiBot:
         logger.info(f"Query processed: {classified_as}")
         return response_data
 
-    def _handle_faq_query(self, classification_result):
+    def _handle_faq_query(self, user_query, classification_result):
         """Handle FAQ-type queries"""
+        # Generate final response
+        # Prepare variables for response generation
+        response_variables = {"USER_QUERY": user_query, "CLASSIFICATION_RESULT": classification_result}
+        response_prompt = prompt_for_navigation.format(**response_variables)
+        final_response = self.final_response(response_prompt)
+        response = final_response.replace('\n', '').replace(r'\"', '')
+
         intent_data = classification_result.get('intent_data')
         if intent_data:
-            response = intent_data.get('response', 'I can help with that topic.')
+            # response = intent_data.get('response', 'I can help with that topic.')
 
             # Add quick actions if available
-            quick_actions = intent_data.get('quick_actions', [])
-            if quick_actions:
-                response += "\n\nQuick actions:"
-                for action in quick_actions[:2]:  # Limit to 2 actions
-                    response += f"\n• {action.get('text', '')}"
+            # quick_actions = intent_data.get('quick_actions', [])
+            # if quick_actions:
+            #     response += "\n\nQuick actions:"
+            #     for action in quick_actions[:2]:  # Limit to 2 actions
+            #         response += f"\n• {action.get('text', '')}"
 
             return response
         else:

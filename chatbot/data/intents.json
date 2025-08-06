@@ -5,7 +5,14 @@
       "intent_type": "navigation",
       "category": "property_management",
       "description": "Start the process of adding a new property to your portfolio",
-      "keywords": ["add", "create", "new", "property", "listing", "start"],
+      "keywords": [
+        "add",
+        "create",
+        "new",
+        "property",
+        "listing",
+        "start"
+      ],
       "patterns": [
         "how to add property",
         "add new property",
@@ -13,10 +20,21 @@
         "start adding property"
       ],
       "response": "To add a new property, go to your dashboard and click the 'Add New Property' button to start the setup process.",
-      "next_steps": ["choose_property_type", "enter_property_address"],
+      "next_steps": [
+        "choose_property_type",
+        "enter_property_address"
+      ],
       "quick_actions": [
-        {"text": "Choose property type", "action": "navigate", "target": "choose_property_type"},
-        {"text": "Skip to address entry", "action": "navigate", "target": "enter_property_address"}
+        {
+          "text": "Choose property type",
+          "action": "navigate",
+          "target": "choose_property_type"
+        },
+        {
+          "text": "Skip to address entry",
+          "action": "navigate",
+          "target": "enter_property_address"
+        }
       ]
     },
     {
@@ -24,7 +42,14 @@
       "intent_type": "navigation",
       "category": "property_setup",
       "description": "Select the type of property you want to add (single family, apartment, condo, etc.)",
-      "keywords": ["property type", "single family", "apartment", "condo", "select", "choose"],
+      "keywords": [
+        "property type",
+        "single family",
+        "apartment",
+        "condo",
+        "select",
+        "choose"
+      ],
       "patterns": [
         "how to select property type",
         "choose single family home",
@@ -32,9 +57,15 @@
         "select apartment type"
       ],
       "response": "In the Add Property flow, choose your property type (Single-Family Home, Apartment, Condo, etc.) and click Next.",
-      "next_steps": ["enter_property_address"],
+      "next_steps": [
+        "enter_property_address"
+      ],
       "quick_actions": [
-        {"text": "Enter address", "action": "navigate", "target": "enter_property_address"}
+        {
+          "text": "Enter address",
+          "action": "navigate",
+          "target": "enter_property_address"
+        }
       ]
     },
     {
@@ -42,7 +73,14 @@
       "intent_type": "navigation",
       "category": "property_setup",
       "description": "Enter the physical address and location details of your property",
-      "keywords": ["address", "location", "street", "city", "state", "zip"],
+      "keywords": [
+        "address",
+        "location",
+        "street",
+        "city",
+        "state",
+        "zip"
+      ],
       "patterns": [
         "where to enter address",
         "add property address",
@@ -50,9 +88,15 @@
         "how to add address"
       ],
       "response": "On the Address Info page, fill in the property name, street address, city, state, and ZIP code, then click Next.",
-      "next_steps": ["confirm_property_address"],
+      "next_steps": [
+        "confirm_property_address"
+      ],
       "quick_actions": [
-        {"text": "Confirm address", "action": "navigate", "target": "confirm_property_address"}
+        {
+          "text": "Confirm address",
+          "action": "navigate",
+          "target": "confirm_property_address"
+        }
       ]
     },
     {
@@ -60,16 +104,28 @@
       "intent_type": "navigation",
       "category": "property_setup",
       "description": "Review and confirm the property address details before proceeding",
-      "keywords": ["confirm", "verify", "check", "address", "review"],
+      "keywords": [
+        "confirm",
+        "verify",
+        "check",
+        "address",
+        "review"
+      ],
       "patterns": [
         "how to confirm address",
         "verify property address",
         "check address details"
       ],
       "response": "Review the address details on the Confirm Address page and click 'Confirm' to proceed.",
-      "next_steps": ["enter_listing_info"],
+      "next_steps": [
+        "enter_listing_info"
+      ],
       "quick_actions": [
-        {"text": "Add listing details", "action": "navigate", "target": "enter_listing_info"}
+        {
+          "text": "Add listing details",
+          "action": "navigate",
+          "target": "enter_listing_info"
+        }
       ]
     },
     {
@@ -77,7 +133,14 @@
       "intent_type": "navigation",
       "category": "property_details",
       "description": "Add basic property details like bedrooms, bathrooms, and square footage",
-      "keywords": ["bedrooms", "bathrooms", "square feet", "listing", "details", "rooms"],
+      "keywords": [
+        "bedrooms",
+        "bathrooms",
+        "square feet",
+        "listing",
+        "details",
+        "rooms"
+      ],
       "patterns": [
         "how to add bedrooms",
         "enter bathroom count",
@@ -85,10 +148,21 @@
         "property details"
       ],
       "response": "On the Listing Info page, enter the number of bedrooms, bathrooms, square footage, and other property details, then click Next.",
-      "next_steps": ["enter_rental_details", "select_amenities"],
+      "next_steps": [
+        "enter_rental_details",
+        "select_amenities"
+      ],
       "quick_actions": [
-        {"text": "Set rental details", "action": "navigate", "target": "enter_rental_details"},
-        {"text": "Add amenities", "action": "navigate", "target": "select_amenities"}
+        {
+          "text": "Set rental details",
+          "action": "navigate",
+          "target": "enter_rental_details"
+        },
+        {
+          "text": "Add amenities",
+          "action": "navigate",
+          "target": "select_amenities"
+        }
       ]
     },
     {
@@ -96,7 +170,14 @@
       "intent_type": "navigation",
       "category": "rental_management",
       "description": "Set rental pricing, deposits, lease terms, and availability dates",
-      "keywords": ["rent", "deposit", "rental", "price", "lease", "availability"],
+      "keywords": [
+        "rent",
+        "deposit",
+        "rental",
+        "price",
+        "lease",
+        "availability"
+      ],
       "patterns": [
         "set rent amount",
         "add security deposit",
@@ -104,10 +185,21 @@
         "lease information"
       ],
       "response": "On the Rental Details page, choose rental type, enter rent and deposit amounts, set availability dates, then click Next.",
-      "next_steps": ["select_amenities", "enter_cost_and_fee"],
+      "next_steps": [
+        "select_amenities",
+        "enter_cost_and_fee"
+      ],
       "quick_actions": [
-        {"text": "Add amenities", "action": "navigate", "target": "select_amenities"},
-        {"text": "Add fees", "action": "navigate", "target": "enter_cost_and_fee"}
+        {
+          "text": "Add amenities",
+          "action": "navigate",
+          "target": "select_amenities"
+        },
+        {
+          "text": "Add fees",
+          "action": "navigate",
+          "target": "enter_cost_and_fee"
+        }
       ]
     },
     {
@@ -115,7 +207,14 @@
       "intent_type": "navigation",
       "category": "property_features",
       "description": "Choose property amenities and features like garage, pool, gym, parking",
-      "keywords": ["amenities", "features", "garage", "pool", "gym", "parking"],
+      "keywords": [
+        "amenities",
+        "features",
+        "garage",
+        "pool",
+        "gym",
+        "parking"
+      ],
       "patterns": [
         "add amenities",
         "select features",
@@ -123,9 +222,15 @@
         "property features"
       ],
       "response": "On the Amenities page, toggle on each feature you want (Garage, Pool, Gym, etc.), then click Next.",
-      "next_steps": ["enter_cost_and_fee"],
+      "next_steps": [
+        "enter_cost_and_fee"
+      ],
       "quick_actions": [
-        {"text": "Add fees", "action": "navigate", "target": "enter_cost_and_fee"}
+        {
+          "text": "Add fees",
+          "action": "navigate",
+          "target": "enter_cost_and_fee"
+        }
       ]
     },
     {
@@ -133,7 +238,14 @@
       "intent_type": "navigation",
       "category": "financial_details",
       "description": "Add additional costs and fees like parking fees, utility charges, or other charges",
-      "keywords": ["fees", "cost", "parking", "utilities", "charges", "additional"],
+      "keywords": [
+        "fees",
+        "cost",
+        "parking",
+        "utilities",
+        "charges",
+        "additional"
+      ],
       "patterns": [
         "add fees",
         "set parking fees",
@@ -141,10 +253,21 @@
         "additional costs"
       ],
       "response": "On the Cost & Fees page, click 'Add Fee', select the category, enter amount and frequency, then save.",
-      "next_steps": ["enter_investor_info", "upload_documents"],
+      "next_steps": [
+        "enter_investor_info",
+        "upload_documents"
+      ],
       "quick_actions": [
-        {"text": "Add investors", "action": "navigate", "target": "enter_investor_info"},
-        {"text": "Upload documents", "action": "navigate", "target": "upload_documents"}
+        {
+          "text": "Add investors",
+          "action": "navigate",
+          "target": "enter_investor_info"
+        },
+        {
+          "text": "Upload documents",
+          "action": "navigate",
+          "target": "upload_documents"
+        }
       ]
     },
     {
@@ -152,7 +275,13 @@
       "intent_type": "navigation",
       "category": "ownership_management",
       "description": "Add investor or owner information including contact details and ownership shares",
-      "keywords": ["investor", "owner", "partnership", "share", "contact"],
+      "keywords": [
+        "investor",
+        "owner",
+        "partnership",
+        "share",
+        "contact"
+      ],
       "patterns": [
         "add investor details",
         "owner information",
@@ -160,9 +289,15 @@
         "partnership setup"
       ],
       "response": "On the Investors page, click 'Add Investor', fill in name, email, ownership share %, emergency contact, then click Next.",
-      "next_steps": ["upload_documents"],
+      "next_steps": [
+        "upload_documents"
+      ],
       "quick_actions": [
-        {"text": "Upload documents", "action": "navigate", "target": "upload_documents"}
+        {
+          "text": "Upload documents",
+          "action": "navigate",
+          "target": "upload_documents"
+        }
       ]
     },
     {
@@ -170,7 +305,13 @@
       "intent_type": "navigation",
       "category": "document_management",
       "description": "Upload property documents like lease agreements, contracts, or other files",
-      "keywords": ["documents", "upload", "files", "lease", "contract"],
+      "keywords": [
+        "documents",
+        "upload",
+        "files",
+        "lease",
+        "contract"
+      ],
       "patterns": [
         "upload documents",
         "add lease agreement",
@@ -178,10 +319,21 @@
         "document upload"
       ],
       "response": "In the Documents step, click 'Upload Document', choose your file, select document type, and click Upload.",
-      "next_steps": ["select_document_type", "set_unavailability"],
+      "next_steps": [
+        "select_document_type",
+        "set_unavailability"
+      ],
       "quick_actions": [
-        {"text": "Select document type", "action": "navigate", "target": "select_document_type"},
-        {"text": "Set unavailability", "action": "navigate", "target": "set_unavailability"}
+        {
+          "text": "Select document type",
+          "action": "navigate",
+          "target": "select_document_type"
+        },
+        {
+          "text": "Set unavailability",
+          "action": "navigate",
+          "target": "set_unavailability"
+        }
       ]
     },
     {
@@ -189,16 +341,27 @@
       "intent_type": "navigation",
       "category": "document_management",
       "description": "Choose the appropriate document type category when uploading files",
-      "keywords": ["document type", "lease agreement", "insurance", "inspection"],
+      "keywords": [
+        "document type",
+        "lease agreement",
+        "insurance",
+        "inspection"
+      ],
       "patterns": [
         "choose document type",
         "document categories",
         "lease agreement type"
       ],
       "response": "Open the 'Document Type' dropdown and select the appropriate type (Lease Agreement, Insurance Policy, etc.) before uploading.",
-      "next_steps": ["set_unavailability"],
+      "next_steps": [
+        "set_unavailability"
+      ],
       "quick_actions": [
-        {"text": "Set unavailability", "action": "navigate", "target": "set_unavailability"}
+        {
+          "text": "Set unavailability",
+          "action": "navigate",
+          "target": "set_unavailability"
+        }
       ]
     },
     {
@@ -206,7 +369,13 @@
       "intent_type": "navigation",
       "category": "calendar_management",
       "description": "Block specific dates when the property is unavailable for maintenance or other reasons",
-      "keywords": ["unavailable", "blocked", "calendar", "maintenance", "dates"],
+      "keywords": [
+        "unavailable",
+        "blocked",
+        "calendar",
+        "maintenance",
+        "dates"
+      ],
       "patterns": [
         "block dates",
         "set unavailable days",
@@ -214,6 +383,721 @@
         "calendar blocking"
       ],
       "response": "On the Unavailability page, click the date you want to block, enter a reason, and save to mark it unavailable.",
+      "next_steps": [],
+      "quick_actions": []
+    },
+    {
+      "page_id": "SPR8-NAV-001",
+      "intent_type": "navigation",
+      "category": "navigation_help",
+      "description": "User wants to find rental listings on the platform",
+      "keywords": [],
+      "patterns": [
+        "Where can I browse rental listings without signing up?"
+      ],
+      "response": "Go to the Rental Guru homepage > Use the default 'Rent' tab in the search module > Select your city and location > Click the 'Find' button to view rental listings.",
+      "next_steps": [],
+      "quick_actions": []
+    },
+    {
+      "page_id": "SPR8-NAV-002",
+      "intent_type": "navigation",
+      "category": "navigation_help",
+      "description": "User wants to explore service requests posted by property owners",
+      "keywords": [],
+      "patterns": [
+        "How do I view available vendor jobs?"
+      ],
+      "response": "Go to the Rental Guru homepage > Click the 'Vendors' tab in the search module > The system will redirect you to the Vendor Tasks Listing Page showing public job posts.",
+      "next_steps": [],
+      "quick_actions": []
+    },
+    {
+      "page_id": "SPR8-NAV-003",
+      "intent_type": "navigation",
+      "category": "navigation_help",
+      "description": "User wants to view all available properties on the platform",
+      "keywords": [],
+      "patterns": [
+        "Where can I see all listed rental properties?"
+      ],
+      "response": "From the landing page, click the 'Properties' tab in the main navigation > You'll be directed to a directory of all listed properties with filters and sorting options available.",
+      "next_steps": [],
+      "quick_actions": []
+    },
+    {
+      "page_id": "SPR8-NAV-004",
+      "intent_type": "navigation",
+      "category": "navigation_help",
+      "description": "User wants to list a property",
+      "keywords": [],
+      "patterns": [
+        "How do I list a property on Rental Guru?"
+      ],
+      "response": "Click 'List a Property' from the landing page or header > If you're not signed up, you'll be redirected to sign up first > If you're signed in but not verified, the system will prompt KYC verification > After verification, you'll proceed to the 'Create Property Listing' flow.",
+      "next_steps": [],
+      "quick_actions": []
+    },
+    {
+      "page_id": "SPR8-NAV-005",
+      "intent_type": "navigation",
+      "category": "navigation_help",
+      "description": "User wants to sign up on the platform",
+      "keywords": [],
+      "patterns": [
+        "Where can I sign up on Rental Guru?"
+      ],
+      "response": "Go to the landing page > Click the 'Sign Up' button at the top right or in the CTA section > Fill out the required information in the sign-up form > Verify your email using the OTP sent to your inbox.",
+      "next_steps": [],
+      "quick_actions": []
+    },
+    {
+      "page_id": "SPR8-NAV-006",
+      "intent_type": "navigation",
+      "category": "navigation_help",
+      "description": "Vendor logs in and wants to find jobs relevant to their role",
+      "keywords": [],
+      "patterns": [
+        "What page do I land on after logging in as a vendor?"
+      ],
+      "response": "After logging in with the 'Vendor' role, the system redirects you automatically to the Vendor Jobs Listing page showing relevant service opportunities.",
+      "next_steps": [],
+      "quick_actions": []
+    },
+    {
+      "page_id": "SPR8-NAV-007",
+      "intent_type": "navigation",
+      "category": "navigation_help",
+      "description": "Tenant logs in and wants to browse available rentals",
+      "keywords": [],
+      "patterns": [
+        "What happens when I log in as a tenant?"
+      ],
+      "response": "After logging in with the 'Tenant' role, you\u2019ll be redirected to the Rental Listings page filtered by your role preferences.",
+      "next_steps": [],
+      "quick_actions": []
+    },
+    {
+      "page_id": "SPR8-NAV-009",
+      "intent_type": "navigation",
+      "category": "navigation_help",
+      "description": "User wants to access the Sign In page from the Sign Up form",
+      "keywords": [],
+      "patterns": [
+        "How can I go to the login screen from the signup page?"
+      ],
+      "response": "On the signup form, click the 'Already have an account? Sign In' link at the bottom > You\u2019ll be redirected to the login screen.",
+      "next_steps": [],
+      "quick_actions": []
+    },
+    {
+      "page_id": "NAV-001",
+      "intent_type": "navigation",
+      "category": "navigation_help",
+      "description": "User wants to log in to their Rental Guru account",
+      "keywords": [],
+      "patterns": [
+        "Where do I log in to my account?"
+      ],
+      "response": "Click the 'Log In' button located in the top-right corner of the landing page. You'll be redirected to the login screen where you can enter your email and password to access your account.",
+      "next_steps": [],
+      "quick_actions": []
+    },
+    {
+      "page_id": "NAV-002",
+      "intent_type": "navigation",
+      "category": "navigation_help",
+      "description": "User has forgotten their password and wants to reset it",
+      "keywords": [],
+      "patterns": [
+        "I forgot my password. How do I reset it?"
+      ],
+      "response": "Go to the login screen and click the 'Forgot Password?' link below the password field. Enter your registered email address, then follow the instructions sent to your email to reset your password.",
+      "next_steps": [],
+      "quick_actions": []
+    },
+    {
+      "page_id": "NAV-003",
+      "intent_type": "navigation",
+      "category": "navigation_help",
+      "description": "User wants to sign up for a Rental Guru account",
+      "keywords": [],
+      "patterns": [
+        "How can I sign up for Rental Guru?"
+      ],
+      "response": "Click the 'Sign Up' button in the top-right corner of the landing page. Fill out the required form fields like name, email, phone number, and password. Then verify your email using the OTP sent to your inbox.",
+      "next_steps": [],
+      "quick_actions": []
+    },
+    {
+      "page_id": "NAV-004",
+      "intent_type": "navigation",
+      "category": "navigation_help",
+      "description": "User's KYC was rejected and they want to resubmit verification",
+      "keywords": [],
+      "patterns": [
+        "How do I resubmit my KYC if it was rejected?"
+      ],
+      "response": "After logging in, if your KYC is rejected, you'll see a red banner at the top of the screen. Click the 'View Details' button to open the KYC Rejection Page and then click 'Resubmit KYC' to upload updated documents.",
+      "next_steps": [],
+      "quick_actions": []
+    },
+    {
+      "page_id": "NAV-005",
+      "intent_type": "navigation",
+      "category": "navigation_help",
+      "description": "User has approved KYC and wants to set up their profile",
+      "keywords": [],
+      "patterns": [
+        "How do I set up my account after KYC approval?"
+      ],
+      "response": "Click the 'Setup Account' button on the banner shown at the top of the Landing or Listing Page. You\u2019ll be taken to the Role Selection screen. Choose either 'Property Owner' or 'Vendor' to proceed with your profile setup.",
+      "next_steps": [],
+      "quick_actions": []
+    },
+    {
+      "page_id": "NAV-006",
+      "intent_type": "navigation",
+      "category": "navigation_help",
+      "description": "Visitor wants to browse vendor jobs from the landing page",
+      "keywords": [],
+      "patterns": [
+        "How can I see vendor jobs without logging in?"
+      ],
+      "response": "On the landing page, click the 'Vendor' tab on the search module. You will be taken to a public page listing vendor tasks where you can view job cards, budgets, timelines, and task details.",
+      "next_steps": [],
+      "quick_actions": []
+    },
+    {
+      "page_id": "NAV-007",
+      "intent_type": "navigation",
+      "category": "navigation_help",
+      "description": "Visitor wants to browse available rental properties",
+      "keywords": [],
+      "patterns": [
+        "Where can I browse properties without signing in?"
+      ],
+      "response": "From the Rental Guru landing page, click on the 'Properties' tab in the top navigation bar. You'll be directed to the properties directory where you can explore listings and apply filters such as city, property type, and price range.",
+      "next_steps": [],
+      "quick_actions": []
+    },
+    {
+      "page_id": "NAV-008",
+      "intent_type": "navigation",
+      "category": "navigation_help",
+      "description": "User wants to list a property as a new user",
+      "keywords": [],
+      "patterns": [
+        "How do I list a property on Rental Guru?"
+      ],
+      "response": "Click on the 'List a Property' button in the top navigation bar. If you're not signed up, the system will take you to the signup page. Once registered and verified via KYC, you can access the property listing form.",
+      "next_steps": [],
+      "quick_actions": []
+    },
+    {
+      "page_id": "NAV-009",
+      "intent_type": "navigation",
+      "category": "navigation_help",
+      "description": "User has verified email and wants to view the dashboard",
+      "keywords": [],
+      "patterns": [
+        "I verified my email. Where do I go now?"
+      ],
+      "response": "Once your email is verified, the system will redirect you to the Universal Dashboard. You can also access it anytime by clicking 'Dashboard' from the profile icon in the top-right navigation bar.",
+      "next_steps": [],
+      "quick_actions": []
+    },
+    {
+      "page_id": "NAV-010",
+      "intent_type": "navigation",
+      "category": "navigation_help",
+      "description": "User is on the dashboard and wants to begin onboarding",
+      "keywords": [],
+      "patterns": [
+        "Where do I start my onboarding?"
+      ],
+      "response": "From the Universal Dashboard, click the green 'Verify KYC' button under the Profile Status section. You\u2019ll be asked to select a role (Property Owner or Vendor) before starting the KYC process.",
+      "next_steps": [],
+      "quick_actions": []
+    },
+    {
+      "page_id": "NAV-011",
+      "intent_type": "navigation",
+      "category": "navigation_help",
+      "description": "User is ready to upload KYC documents after selecting role",
+      "keywords": [],
+      "patterns": [
+        "How do I upload my KYC documents as a Property Owner?"
+      ],
+      "response": "Once you\u2019ve selected 'Property Owner' as your role, the system redirects you to the KYC form. Choose your ID type, upload the required images, and click 'Submit for Verification'.",
+      "next_steps": [],
+      "quick_actions": []
+    },
+    {
+      "page_id": "NAV-012",
+      "intent_type": "navigation",
+      "category": "navigation_help",
+      "description": "User wants to complete account setup after KYC approval",
+      "keywords": [],
+      "patterns": [
+        "My KYC is approved. Where do I complete my profile setup?"
+      ],
+      "response": "After your KYC is approved, the system redirects you to the Profile Setup page. Upload a profile image, choose individual or business registration, fill in the form, and click 'Continue'.",
+      "next_steps": [],
+      "quick_actions": []
+    },
+    {
+      "page_id": "NAV-013",
+      "intent_type": "navigation",
+      "category": "navigation_help",
+      "description": "User is redirected to select a subscription plan after KYC",
+      "keywords": [],
+      "patterns": [
+        "Where do I choose a subscription plan?"
+      ],
+      "response": "After your KYC is approved, the system takes you to the Subscription Selection page where you can pick between Free, Pro, or Enterprise plans and proceed to payment.",
+      "next_steps": [],
+      "quick_actions": []
+    },
+    {
+      "page_id": "NAV-014",
+      "intent_type": "navigation",
+      "category": "navigation_help",
+      "description": "User wants to purchase a selected subscription",
+      "keywords": [],
+      "patterns": [
+        "I chose a subscription plan. How do I pay for it?"
+      ],
+      "response": "After selecting a plan, you'll be redirected to the payment form. Enter your credit card details, then click 'Checkout' to complete the payment.",
+      "next_steps": [],
+      "quick_actions": []
+    },
+    {
+      "page_id": "NAV-015",
+      "intent_type": "navigation",
+      "category": "navigation_help",
+      "description": "User wants to log out of their account securely",
+      "keywords": [],
+      "patterns": [
+        "How can I log out of Rental Guru?"
+      ],
+      "response": "Click your profile icon in the top-right corner, then select 'Logout' from the dropdown. The system will end your session and redirect you to the login page.",
+      "next_steps": [],
+      "quick_actions": []
+    },
+    {
+      "page_id": "NAV-016",
+      "intent_type": "navigation",
+      "category": "navigation_help",
+      "description": "User wants to invite a vendor to the platform",
+      "keywords": [],
+      "patterns": [
+        "Where do I invite vendors to Rental Guru?"
+      ],
+      "response": "Go to the 'Vendor Management' section from the sidebar and click the 'Invite' button. Fill in the vendor\u2019s details in the popup and click 'Invite' to send them an invitation.",
+      "next_steps": [],
+      "quick_actions": []
+    },
+    {
+      "page_id": "NAV-017",
+      "intent_type": "navigation",
+      "category": "navigation_help",
+      "description": "User wants to view vendors who have already joined",
+      "keywords": [],
+      "patterns": [
+        "How do I see the list of vendors I\u2019ve invited and who joined?"
+      ],
+      "response": "Click 'Vendors' from the sidebar. The system opens 'Vendor Management' with 'Joined' tab selected by default, displaying all accepted vendors with contact and job info.",
+      "next_steps": [],
+      "quick_actions": []
+    },
+    {
+      "page_id": "SPR8-VEN-014",
+      "intent_type": "navigation",
+      "category": "navigation_help",
+      "description": "User wants to view vendors they have invited but who haven\u2019t accepted the invitation yet",
+      "keywords": [],
+      "patterns": [
+        "Where can I see the vendors I\u2019ve invited who haven\u2019t joined yet?"
+      ],
+      "response": "Go to the sidebar and click 'Vendors' > Click the 'Invited' tab at the top > You\u2019ll see a table listing all invited vendors with their name, role, and email > Use the 'Resend Invitation' link if needed.",
+      "next_steps": [],
+      "quick_actions": []
+    },
+    {
+      "page_id": "SPR8-VEN-015",
+      "intent_type": "navigation",
+      "category": "navigation_help",
+      "description": "User wants to search for a specific vendor by name, email, or role",
+      "keywords": [],
+      "patterns": [
+        "How can I search for a vendor by name or role?"
+      ],
+      "response": "Go to 'Vendors' in the sidebar > Click on either 'Joined' or 'Invited' tab > Use the search bar at the top-right and type in the vendor's name, role, or email to filter the list in real-time.",
+      "next_steps": [],
+      "quick_actions": []
+    },
+    {
+      "page_id": "SPR8-VEN-016",
+      "intent_type": "navigation",
+      "category": "navigation_help",
+      "description": "User wants to view full profile of a specific joined vendor",
+      "keywords": [],
+      "patterns": [
+        "How do I view a detailed profile of a vendor?"
+      ],
+      "response": "Go to 'Vendors' in the sidebar > Ensure you're on the 'Joined' tab > Locate the vendor in the table and click the Eye icon in the 'Action' column > This will redirect you to the Vendor Details page.",
+      "next_steps": [],
+      "quick_actions": []
+    },
+    {
+      "page_id": "SPR8-TEN-017",
+      "intent_type": "navigation",
+      "category": "navigation_help",
+      "description": "User wants to view tenants who have accepted invites and are actively using the platform",
+      "keywords": [],
+      "patterns": [
+        "Where can I view all the tenants who have joined the platform?"
+      ],
+      "response": "Click on 'Tenants' in the sidebar > Make sure the 'Joined' tab is selected > You will see a table with tenant name, type, email, phone, and more.",
+      "next_steps": [],
+      "quick_actions": []
+    },
+    {
+      "page_id": "SPR8-TEN-018",
+      "intent_type": "navigation",
+      "category": "navigation_help",
+      "description": "User wants to view invited tenants who haven\u2019t joined yet",
+      "keywords": [],
+      "patterns": [
+        "Where can I find the tenants I\u2019ve invited but who haven\u2019t joined yet?"
+      ],
+      "response": "Go to the sidebar and click 'Tenants' > Select the 'Invited' tab at the top > You\u2019ll see a table of invited tenants > You can resend invitations using the link in the 'Action' column.",
+      "next_steps": [],
+      "quick_actions": []
+    },
+    {
+      "page_id": "SPR8-TEN-019",
+      "intent_type": "navigation",
+      "category": "navigation_help",
+      "description": "User wants to search for a specific tenant by name, type, or email",
+      "keywords": [],
+      "patterns": [
+        "How can I search for a tenant by name or email?"
+      ],
+      "response": "Click on 'Tenants' from the sidebar > Use the search icon at the top-right of either the 'Joined' or 'Invited' tab > Enter the tenant name, type, or email to filter the list in real-time.",
+      "next_steps": [],
+      "quick_actions": []
+    },
+    {
+      "page_id": "SPR8-VEN-014",
+      "intent_type": "navigation",
+      "category": "navigation_help",
+      "description": "User wants to view vendors they have invited but who haven\u2019t accepted the invitation yet",
+      "keywords": [],
+      "patterns": [
+        "Where can I see the vendors I\u2019ve invited who haven\u2019t joined yet?"
+      ],
+      "response": "Go to the sidebar and click 'Vendors' > Click the 'Invited' tab at the top > You\u2019ll see a table listing all invited vendors with their name, role, and email > Use the 'Resend Invitation' link if needed.",
+      "next_steps": [],
+      "quick_actions": []
+    },
+    {
+      "page_id": "SPR8-VEN-015",
+      "intent_type": "navigation",
+      "category": "navigation_help",
+      "description": "User wants to search for a specific vendor by name, email, or role",
+      "keywords": [],
+      "patterns": [
+        "How can I search for a vendor by name or role?"
+      ],
+      "response": "Go to 'Vendors' in the sidebar > Click on either 'Joined' or 'Invited' tab > Use the search bar at the top-right and type in the vendor's name, role, or email to filter the list in real-time.",
+      "next_steps": [],
+      "quick_actions": []
+    },
+    {
+      "page_id": "SPR8-VEN-016",
+      "intent_type": "navigation",
+      "category": "navigation_help",
+      "description": "User wants to view full profile of a specific joined vendor",
+      "keywords": [],
+      "patterns": [
+        "How do I view a detailed profile of a vendor?"
+      ],
+      "response": "Go to 'Vendors' in the sidebar > Ensure you're on the 'Joined' tab > Locate the vendor in the table and click the Eye icon in the 'Action' column > This will redirect you to the Vendor Details page.",
+      "next_steps": [],
+      "quick_actions": []
+    },
+    {
+      "page_id": "SPR8-TEN-017",
+      "intent_type": "navigation",
+      "category": "navigation_help",
+      "description": "User wants to view tenants who have accepted invites and are actively using the platform",
+      "keywords": [],
+      "patterns": [
+        "Where can I view all the tenants who have joined the platform?"
+      ],
+      "response": "Click on 'Tenants' in the sidebar > Make sure the 'Joined' tab is selected > You will see a table with tenant name, type, email, phone, and more.",
+      "next_steps": [],
+      "quick_actions": []
+    },
+    {
+      "page_id": "SPR8-TEN-018",
+      "intent_type": "navigation",
+      "category": "navigation_help",
+      "description": "User wants to view invited tenants who haven\u2019t joined yet",
+      "keywords": [],
+      "patterns": [
+        "Where can I find the tenants I\u2019ve invited but who haven\u2019t joined yet?"
+      ],
+      "response": "Go to the sidebar and click 'Tenants' > Select the 'Invited' tab at the top > You\u2019ll see a table of invited tenants > You can resend invitations using the link in the 'Action' column.",
+      "next_steps": [],
+      "quick_actions": []
+    },
+    {
+      "page_id": "SPR8-TEN-019",
+      "intent_type": "navigation",
+      "category": "navigation_help",
+      "description": "User wants to search for a specific tenant by name, type, or email",
+      "keywords": [],
+      "patterns": [
+        "How can I search for a tenant by name or email?"
+      ],
+      "response": "Click on 'Tenants' from the sidebar > Use the search icon at the top-right of either the 'Joined' or 'Invited' tab > Enter the tenant name, type, or email to filter the list in real-time.",
+      "next_steps": [],
+      "quick_actions": []
+    },
+    {
+      "page_id": "SPR8-VEN-014",
+      "intent_type": "navigation",
+      "category": "navigation_help",
+      "description": "User wants to view vendors they have invited but who haven\u2019t accepted the invitation yet",
+      "keywords": [],
+      "patterns": [
+        "Where can I see the vendors I\u2019ve invited who haven\u2019t joined yet?"
+      ],
+      "response": "Go to the sidebar and click 'Vendors' > Click the 'Invited' tab at the top > You\u2019ll see a table listing all invited vendors with their name, role, and email > Use the 'Resend Invitation' link if needed.",
+      "next_steps": [],
+      "quick_actions": []
+    },
+    {
+      "page_id": "SPR8-VEN-015",
+      "intent_type": "navigation",
+      "category": "navigation_help",
+      "description": "User wants to search for a specific vendor by name, email, or role",
+      "keywords": [],
+      "patterns": [
+        "How can I search for a vendor by name or role?"
+      ],
+      "response": "Go to 'Vendors' in the sidebar > Click on either 'Joined' or 'Invited' tab > Use the search bar at the top-right and type in the vendor's name, role, or email to filter the list in real-time.",
+      "next_steps": [],
+      "quick_actions": []
+    },
+    {
+      "page_id": "SPR8-VEN-016",
+      "intent_type": "navigation",
+      "category": "navigation_help",
+      "description": "User wants to view full profile of a specific joined vendor",
+      "keywords": [],
+      "patterns": [
+        "How do I view a detailed profile of a vendor?"
+      ],
+      "response": "Go to 'Vendors' in the sidebar > Ensure you're on the 'Joined' tab > Locate the vendor in the table and click the Eye icon in the 'Action' column > This will redirect you to the Vendor Details page.",
+      "next_steps": [],
+      "quick_actions": []
+    },
+    {
+      "page_id": "SPR8-TEN-017",
+      "intent_type": "navigation",
+      "category": "navigation_help",
+      "description": "User wants to view tenants who have accepted invites and are actively using the platform",
+      "keywords": [],
+      "patterns": [
+        "Where can I view all the tenants who have joined the platform?"
+      ],
+      "response": "Click on 'Tenants' in the sidebar > Make sure the 'Joined' tab is selected > You will see a table with tenant name, type, email, phone, and more.",
+      "next_steps": [],
+      "quick_actions": []
+    },
+    {
+      "page_id": "SPR8-TEN-018",
+      "intent_type": "navigation",
+      "category": "navigation_help",
+      "description": "User wants to view invited tenants who haven\u2019t joined yet",
+      "keywords": [],
+      "patterns": [
+        "Where can I find the tenants I\u2019ve invited but who haven\u2019t joined yet?"
+      ],
+      "response": "Go to the sidebar and click 'Tenants' > Select the 'Invited' tab at the top > You\u2019ll see a table of invited tenants > You can resend invitations using the link in the 'Action' column.",
+      "next_steps": [],
+      "quick_actions": []
+    },
+    {
+      "page_id": "SPR8-TEN-019",
+      "intent_type": "navigation",
+      "category": "navigation_help",
+      "description": "User wants to search for a specific tenant by name, type, or email",
+      "keywords": [],
+      "patterns": [
+        "How can I search for a tenant by name or email?"
+      ],
+      "response": "Click on 'Tenants' from the sidebar > Use the search icon at the top-right of either the 'Joined' or 'Invited' tab > Enter the tenant name, type, or email to filter the list in real-time.",
+      "next_steps": [],
+      "quick_actions": []
+    },
+    {
+      "page_id": "SPR8-NAV-025",
+      "intent_type": "navigation",
+      "category": "navigation_help",
+      "description": "Vendor forgot their password and wants to reset it",
+      "keywords": [],
+      "patterns": [
+        "How do I reset my password if I forgot it?"
+      ],
+      "response": "On the login page, click the 'Forgot Password?' link. Enter your registered email and click 'Send Verification Code'. Check your email for the 4-digit OTP. Enter the OTP and proceed to set a new password. Once submitted, you\u2019ll be redirected to the login page.",
+      "next_steps": [],
+      "quick_actions": []
+    },
+    {
+      "page_id": "SPR8-NAV-026",
+      "intent_type": "navigation",
+      "category": "navigation_help",
+      "description": "Vendor is logged in and wants to log out",
+      "keywords": [],
+      "patterns": [
+        "How do I log out of my Rental Guru vendor account?"
+      ],
+      "response": "Click your profile icon in the top navigation bar. Select 'Logout' from the dropdown. The system will log you out, clear your session, and redirect you to the login page.",
+      "next_steps": [],
+      "quick_actions": []
+    },
+    {
+      "page_id": "SPR8-NAV-027",
+      "intent_type": "navigation",
+      "category": "navigation_help",
+      "description": "Tenant is required to complete onboarding to access personalized recommendations",
+      "keywords": [],
+      "patterns": [
+        "Where can I set up my account as a tenant?"
+      ],
+      "response": "After email verification and first login, you\u2019ll be directed to a multi-step onboarding form. Fill each step or use 'Skip' to proceed. Complete all steps to unlock tailored rental and financial recommendations.",
+      "next_steps": [],
+      "quick_actions": []
+    },
+    {
+      "page_id": "SPR8-NAV-028",
+      "intent_type": "navigation",
+      "category": "navigation_help",
+      "description": "Tenant received an email invitation from a Property Owner",
+      "keywords": [],
+      "patterns": [
+        "Where do I go after accepting a rental invitation email?"
+      ],
+      "response": "Click the 'Accept Invitation' link in your email. You\u2019ll be redirected to the Tenant Registration page. Complete the required fields to set your password and agree to terms. Submit the form to access your Tenant Dashboard.",
+      "next_steps": [],
+      "quick_actions": []
+    },
+    {
+      "page_id": "SPR8-NAV-029",
+      "intent_type": "navigation",
+      "category": "navigation_help",
+      "description": "Tenant is logged in and wants to log out",
+      "keywords": [],
+      "patterns": [
+        "How do I log out as a tenant?"
+      ],
+      "response": "Click your profile icon in the top navigation bar. Select 'Logout'. The system will end your session and redirect you to the login page with a logout confirmation message.",
+      "next_steps": [],
+      "quick_actions": []
+    },
+    {
+      "page_id": "SPR8-NAV-030",
+      "intent_type": "navigation",
+      "category": "navigation_help",
+      "description": "Super Admin needs to sign in to access their dashboard",
+      "keywords": [],
+      "patterns": [
+        "How do I log in as a Super Admin?"
+      ],
+      "response": "Enter the Super Admin portal URL. Fill in your registered email and password. Upon validation, you\u2019ll receive an OTP via email. Enter the OTP to access the Admin Dashboard.",
+      "next_steps": [],
+      "quick_actions": []
+    },
+    {
+      "page_id": "SPR8-NAV-031",
+      "intent_type": "navigation",
+      "category": "navigation_help",
+      "description": "Super Admin forgot their password",
+      "keywords": [],
+      "patterns": [
+        "What should I do if I forgot my Super Admin password?"
+      ],
+      "response": "On the login page, click 'Forgot Password?'. Enter your email and click 'Next'. You\u2019ll receive an OTP to reset your password. Enter the OTP, then set a new password to complete the reset.",
+      "next_steps": [],
+      "quick_actions": []
+    },
+    {
+      "page_id": "SPR8-NAV-032",
+      "intent_type": "navigation",
+      "category": "navigation_help",
+      "description": "Super Admin needs to review user KYC submissions",
+      "keywords": [],
+      "patterns": [
+        "Where can I view submitted KYC requests?"
+      ],
+      "response": "Log in to the Super Admin dashboard > From the left-side menu, click 'KYC Management' > View the full list of KYC requests with options to search, filter, and view details.",
+      "next_steps": [],
+      "quick_actions": []
+    },
+    {
+      "page_id": "SPR8-NAV-033",
+      "intent_type": "navigation",
+      "category": "navigation_help",
+      "description": "Super Admin is logged in and wants to log out securely",
+      "keywords": [],
+      "patterns": [
+        "How do I log out from the Super Admin panel?"
+      ],
+      "response": "Click on your profile icon in the top right corner > Select 'Logout' > The system ends your session and redirects you to the login page.",
+      "next_steps": [],
+      "quick_actions": []
+    },
+    {
+      "page_id": "SPR8-NAV-008",
+      "intent_type": "navigation",
+      "category": "navigation_help",
+      "description": "User wants to join the platform as a vendor",
+      "keywords": [],
+      "patterns": [
+        "How can I join Rental Guru as a vendor?"
+      ],
+      "response": "On the landing page, click 'Join as Vendor' > If you\u2019re not signed in, you\u2019ll be redirected to the signup screen > Once signed up, complete KYC verification to access full vendor features.",
+      "next_steps": [],
+      "quick_actions": []
+    },
+    {
+      "page_id": "SPR8-NAV-001",
+      "intent_type": "navigation",
+      "category": "navigation_help",
+      "description": "User is looking for payment history screen",
+      "keywords": [],
+      "patterns": [
+        "Where can I find my payment history?"
+      ],
+      "response": "Go to the side menu > Click 'Payments' > You\u2019ll land on the Payments Dashboard > Scroll down to 'Payment History' section to view past transactions.",
+      "next_steps": [],
+      "quick_actions": []
+    },
+    {
+      "page_id": "SPR8-NAV-013",
+      "intent_type": "navigation",
+      "category": "navigation_help",
+      "description": "User wants to apply a late fee to an overdue tenant transaction",
+      "keywords": [],
+      "patterns": [
+        "How do I apply a late fee to an overdue transaction?"
+      ],
+      "response": "Go to the side menu and click 'Payments' > Ensure you're on the 'Tenants' tab > Locate the overdue transaction and click the three-dots icon > Select 'View Details' > In the modal, if the transaction is overdue, the system will show an 'Apply Late Fee' button at the bottom > Click it to open the Late Fee modal and proceed.",
       "next_steps": [],
       "quick_actions": []
     }
