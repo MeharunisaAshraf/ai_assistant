@@ -52,17 +52,17 @@ def chat_query(request):
         # Initialize AI Assistant
         ai_assistant = AIAssistant()
         
-        # Test connection first
-        if not ai_assistant.test_connection():
-            logger.error("AI Assistant connection failed")
-            return Response(
-                {
-                    'success': False,
-                    'error': 'AI service is currently unavailable. Please try again later.',
-                    'details': {'connection_error': 'Failed to connect to Gemini API'}
-                },
-                status=status.HTTP_503_SERVICE_UNAVAILABLE
-            )
+        # # Test connection first
+        # if not ai_assistant.test_connection():
+        #     logger.error("AI Assistant connection failed")
+        #     return Response(
+        #         {
+        #             'success': False,
+        #             'error': 'AI service is currently unavailable. Please try again later.',
+        #             'details': {'connection_error': 'Failed to connect to Gemini API'}
+        #         },
+        #         status=status.HTTP_503_SERVICE_UNAVAILABLE
+        #     )
 
         # Process the query
         result = ai_assistant.process_query(query)

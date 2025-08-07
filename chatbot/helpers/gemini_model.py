@@ -20,13 +20,13 @@ class GeminiBot:
         self.db_connector, self.database_schema = get_db_connection()
 
         genai.configure(api_key=self.config.get('GEMINI_API_KEY', ''))
-        self.model = genai.GenerativeModel(self.config.get('MODEL_NAME', 'gemini-2.5-flash-lite'))
+        self.model = genai.GenerativeModel(self.config.get('MODEL_NAME', 'gemini-2.5-pro'))
 
         self.generation_config = genai.types.GenerationConfig(
             temperature=self.config.get('TEMPERATURE', 0.1),
             top_p=self.config.get('TOP_P', 0.8),
             top_k=self.config.get('TOP_K', 40),
-            max_output_tokens=self.config.get('MAX_OUTPUT_TOKENS', 1024),
+            # max_output_tokens=self.config.get('MAX_OUTPUT_TOKENS', 1024),
         )
 
         print("Gemini connected successfully!")
@@ -278,7 +278,7 @@ class GeminiBot:
                 "Respond with 'OK' if you can read this message.",
                 generation_config=genai.types.GenerationConfig(
                     temperature=0,
-                    max_output_tokens=10
+                    # max_output_tokens=10
                 )
             )
             return response.text.strip().upper() == 'OK'

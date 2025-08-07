@@ -15,14 +15,14 @@ class AIAssistant(GeminiBot):
 
     def __init__(self):
         super().__init__()
-        self.chatbot = GeminiBot()
+        # self.chatbot = GeminiBot()
 
     def run(self):
         """Function to run the chatbot interactively"""
         print(Message.AI_BOT.value)
         print(Message.QUIT_INSTRUCTION.value)
         try:
-            if not self.chatbot.test_connection():
+            if not self.test_connection():
                 print(Error.GEMINI_CONNECTION.value)
                 return
 
@@ -39,7 +39,7 @@ class AIAssistant(GeminiBot):
                 if not user_input:
                     continue
 
-                result = self.chatbot.process_query(user_input)
+                result = self.process_query(user_input)
                 print(f"Bot: {result.get('response')}")
         except Exception as e:
             logger.error(f"Error in main: {str(e)}")
