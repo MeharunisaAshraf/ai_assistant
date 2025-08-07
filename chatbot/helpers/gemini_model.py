@@ -1,7 +1,8 @@
 import json
 import logging
 from typing import Dict, Optional
-import google.generativeai as genai
+from google import genai
+from google.genai import types
 from chatbot.data.constants import Message
 from chatbot.data.prompts import initial_prompt, prompt_with_sql_data, prompt_with_sql_error, prompt_for_navigation
 from chatbot.helpers.config_connector import load_config, load_intents, get_db_connection
@@ -19,14 +20,23 @@ class GeminiBot:
         self.intents_text = self.get_intent_descriptions()
         self.db_connector, self.database_schema = get_db_connection()
 
-        genai.configure(api_key=self.config.get('GEMINI_API_KEY', ''))
-        self.model = genai.GenerativeModel(self.config.get('MODEL_NAME', 'gemini-2.5-pro'))
+        # genai.configure(api_key=self.config.get('GEMINI_API_KEY', ''))
+        self.genai_client = genai.Client(api_key=self.config.get('GEMINI_API_KEY', ''))
+        # self.model = genai.GenerativeModel(self.config.get('MODEL_NAME', 'gemini-2.5-flash-lite'))
+        self.model = self.config.get('MODEL_NAME', 'gemini-2.5-flash-lite')
 
-        self.generation_config = genai.types.GenerationConfig(
+        # self.generation_config = genai.types.GenerationConfig(
+        #     temperature=self.config.get('TEMPERATURE', 0.1),
+        #     top_p=self.config.get('TOP_P', 0.8),
+        #     top_k=self.config.get('TOP_K', 40),
+        #     max_output_tokens=self.config.get('MAX_OUTPUT_TOKENS', 1024),
+        # )
+        self.generation_config = types.GenerateContentConfig(
             temperature=self.config.get('TEMPERATURE', 0.1),
             top_p=self.config.get('TOP_P', 0.8),
-            top_k=self.config.get('TOP_K', 40),
-            # max_output_tokens=self.config.get('MAX_OUTPUT_TOKENS', 1024),
+            top_k=20,
+            candidate_count=1,
+            # thinking_config=genai.types.ThinkingConfig(thinking_budget=0, include_thoughts=True)  # Disables thinking
         )
 
         print("Gemini connected successfully!")
@@ -53,9 +63,15 @@ class GeminiBot:
             }
             prompt = initial_prompt.format(**variables)
 
-            response = self.model.generate_content(
-                prompt,
-                generation_config=self.generation_config
+            # response = self.model.generate_content(
+            #     prompt,
+            #     generation_config=self.generation_config
+            # )
+
+            response = self.genai_client.models.generate_content(
+                model=self.model,
+                contents=prompt,
+                config=self.generation_config
             )
 
             result = json.loads(response.text.strip().replace('```json', '').replace('```', ''))
@@ -84,10 +100,17 @@ class GeminiBot:
     def final_response(self, prompt_with_dta):
         """Generate final response from query results"""
 
-        response = self.model.generate_content(
-            prompt_with_dta,
-            generation_config=self.generation_config
-        )
+        # response = self.model.generate_content(
+        #     prompt_with_dta,
+        #     generation_config=self.generation_config
+        # )
+
+        response = self.genai_client.models.generate_content(
+                model=self.model,
+                contents=prompt_with_dta,
+                config=self.generation_config
+            )
+
         return response.text.strip()
 
     def _find_intent_by_id(self, page_id: str) -> Optional[Dict]:
@@ -255,9 +278,15 @@ class GeminiBot:
             logger.info(f"Attempting to correct SQL error: {error_message}")
 
             # Get corrected query from Gemini
-            response = self.model.generate_content(
-                error_correction_prompt,
-                generation_config=self.generation_config
+            # response = self.model.generate_content(
+            #     error_correction_prompt,
+            #     generation_config=self.generation_config
+            # )
+
+            response = self.genai_client.models.generate_content(
+                model=self.model,
+                contents=error_correction_prompt,
+                config=self.generation_config
             )
 
             # Parse the corrected result
@@ -274,12 +303,22 @@ class GeminiBot:
     def test_connection(self) -> bool:
         """Test Gemini API connection"""
         try:
-            response = self.model.generate_content(
-                "Respond with 'OK' if you can read this message.",
-                generation_config=genai.types.GenerationConfig(
-                    temperature=0,
-                    # max_output_tokens=10
-                )
+            # response = self.model.generate_content(
+            #     "Respond with 'OK' if you can read this message.",
+            #     generation_config=genai.types.GenerationConfig(
+            #         temperature=0,
+            #         max_output_tokens=10
+            #     )
+            # )
+            response = self.genai_client.models.generate_content(
+                model=self.model,
+                contents="Respond with 'OK' if you can read this message.",
+                config=types.GenerateContentConfig(
+                        temperature=0,
+                        candidate_count=1,
+                        # max_output_tokens=10,
+                        thinking_config=genai.types.ThinkingConfig(thinking_budget=-1, include_thoughts=True)  # Dynamic thinking
+                    )
             )
             return response.text.strip().upper() == 'OK'
         except Exception as e:
